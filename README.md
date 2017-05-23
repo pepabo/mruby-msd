@@ -1,4 +1,4 @@
-# mruby-msd   [![Build Status](https://travis-ci.org/pyama86/mruby-msd.svg?branch=master)](https://travis-ci.org/pyama86/mruby-msd)
+# mruby-msd   [![Build Status](https://travis-ci.org/pepabo/mruby-msd.svg?branch=master)](https://travis-ci.org/pepabo/mruby-msd)
 msd class
 ## install by mrbgems
 - add conf.gem line to `build_config.rb`
