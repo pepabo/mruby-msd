@@ -50,19 +50,16 @@ assert("Msd::Store::MySQL.connect?") do
   assert_true s.connect?
 end
 
-assert("Msd::Store::MySQL.fetch OK") do
+assert("Msd::Store::MySQL.fetch") do
   s = subject
   s.set_mysql_class(make_basic_mock('sample.jp', '0'))
   assert_equal(s.fetch("sample.jp"), "0")
-end
 
-assert("Msd::Store::MySQL.fetch NOT OK") do
-  s = subject
   s.set_mysql_class(make_basic_mock('sample.com', ''))
   assert_equal(s.fetch("sample.com"), "")
 end
 
-assert("Msd::Store::MySQL.hash OK") do
+assert("Msd::Store::MySQL.hash") do
   s = subject('SELECT host, flg FROM test WHERE host = ?')
   s.hash_keys = %w(host flg)
   s.set_mysql_class(make_hash_mock('sample.jp', ['sample.jp', '0']))
