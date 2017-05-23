@@ -1,0 +1,19 @@
+unit:
+  hostname: unit.example.com
+  build: docker/
+  command: [ "/sbin/init" ]
+  links:
+    - db
+    - redis
+  volumes:
+    - ./:/opt/msd
+  working_dir: /opt/msd
+db:
+  image: mysql:5.6
+  privileged: true
+  command: [ "docker-entrypoint.sh", "mysqld" ]
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+redis:
+  image: redis
+  privileged: true

@@ -1,0 +1,6 @@
+name: mruby-msd
+description: msd class
+author: pyama86
+website: https://github.com/pyama86/mruby-msd
+protocol: git
+repository: https://github.com/pyama86/mruby-msd.git
