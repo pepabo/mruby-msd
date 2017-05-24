@@ -7,6 +7,8 @@ before_install:
 install:
   - sudo apt-get -qq install rake bison git gperf redis-server
 before_script:
+  - sudo redis-server --port 6379 &
+  - sudo redis-server --port 6380 --requirepass 'secret' &
   - cd ../
   - git clone https://github.com/mruby/mruby.git
   - cd mruby
