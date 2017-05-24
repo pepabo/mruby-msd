@@ -14,8 +14,6 @@ module Msd
 
       def set_mysql_class(mysql)
         @mysql = mysql
-        disconnect
-        connect
       end
 
       def connect
