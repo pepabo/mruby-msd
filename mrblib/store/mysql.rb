@@ -3,12 +3,12 @@ module Msd
     class MySQL
       include HashKeys
       include Prefixer
-      def initialize(query, server = nil, user = nil, password = nil, database = nil)
+      def initialize(query, host = nil, user = nil, password = nil, database = nil)
         @query = query
-        @server = ENV['MYSQL_HOST'] || server
-        @user = ENV['MYSQL_USER'] || user
-        @password = ENV['MYSQL_PASSWORD'] || password
-        @database = ENV['MYSQL_DATABASE'] || database
+        @host = host || ENV['MYSQL_HOST']
+        @user = user || ENV['MYSQL_USER']
+        @password = password || ENV['MYSQL_PASSWORD']
+        @database = database || ENV['MYSQL_DATABASE']
         @mysql = ::MySQL::Database
       end
 
@@ -17,7 +17,7 @@ module Msd
       end
 
       def connect
-        @_c ||= @mysql.new(@server, @user, @password, @database)
+        @_c ||= @mysql.new(@host, @user, @password, @database)
       end
 
       def connect?
