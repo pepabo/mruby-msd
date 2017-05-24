@@ -3,9 +3,10 @@ module Msd
     class Redis
       include HashKeys
       include Prefixer
-      def initialize(host=nil, port=nil, timeout=1)
+      def initialize(host=nil, port=nil, lifetime=300,timeout=1)
         @host = host || ::ENV['REDIS_HOST'] || '127.0.0.1'
         @port = port || ::ENV['REDIS_PORT'] || 6379
+        @lifetime = lifetime
         @timeout = timeout
         @klass = ::Redis
       end
@@ -49,6 +50,7 @@ module Msd
         else
           @_c[key] = val
         end
+        @_c.expire(key, @lifetime)
       end
 
       def purge(key)
@@ -78,6 +80,10 @@ module Msd
 
         def ping
           @c
+        end
+
+        def expire(key, lifetime)
+          raise "Lifetime needs to be 300 seconds" if 300 != lifetime
         end
 
         def[]=(k,v)
