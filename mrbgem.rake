@@ -9,6 +9,7 @@ MRuby::Gem::Specification.new('mruby-msd') do |spec|
   spec.add_dependency 'mruby-redis'
   spec.add_dependency 'mruby-json'
   spec.add_dependency 'mruby-env'
+  spec.add_dependency 'mruby-mutex'
   spec.add_test_dependency 'mruby-array-ext'
   spec.add_test_dependency 'mruby-print'
 end

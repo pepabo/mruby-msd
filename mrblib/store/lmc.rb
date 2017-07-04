@@ -4,8 +4,12 @@ module Msd
     class Lmc
       include HashKeys
       include Prefixer
-      def initialize(namespace)
+      include Locker
+      def initialize(namespace, retry_time=10000, retry_count=10)
         @namespace = namespace
+        @mutex = Mutex.new(:global => true)
+        @retry_time = retry_time
+        @retry_count = retry_count
       end
 
       def connect
@@ -24,31 +28,37 @@ module Msd
       def fetch(key)
         key = set_prefix(key)
         connect unless connect?
-        if has_keys?
-          begin
-            JSON.parse(@_c[key])
-          rescue
+        try_lock_do do
+          if has_keys?
+            begin
+              JSON.parse(@_c[key])
+            rescue
+              @_c[key]
+            end
+          else
             @_c[key]
           end
-        else
-          @_c[key]
         end
       end
 
       def cache(key, val)
         key = set_prefix(key)
         connect unless connect?
-        if has_keys?
-          @_c[key] = val.to_json
-        else
-          @_c[key] = val
+        try_lock_do do
+          if has_keys?
+            @_c[key] = val.to_json
+          else
+            @_c[key] = val
+          end
         end
       end
 
       def purge(key)
-        key = set_prefix(key)
-        connect unless connect?
-        @_c.delete(key)
+        try_lock_do do
+          key = set_prefix(key)
+          connect unless connect?
+          @_c.delete(key)
+        end
       end
 
       alias_method :before_connect_retry, :drop
