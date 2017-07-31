@@ -18,10 +18,10 @@ assert("Msd#configure") do
     c.stores = 4
   end
 
-  assert_equal(Msd.config.retry_count, 1)
-  assert_equal(Msd.config.retry_usleep, 2)
-  assert_equal(Msd.config.logger, 3)
-  assert_equal(Msd.config.stores, 4)
+  assert_equal(1, Msd.config.retry_count)
+  assert_equal(2, Msd.config.retry_usleep)
+  assert_equal(3, Msd.config.logger)
+  assert_equal(4, Msd.config.stores)
 end
 
 assert("Msd#setup") do
@@ -40,5 +40,5 @@ assert("Msd#fetch") do
   end
   lmc.cache("example", "value")
 
-  assert_equal(Msd.fetch("example"), "value")
+  assert_equal("value", Msd.fetch("example"))
 end

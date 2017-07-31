@@ -37,20 +37,20 @@ end
 assert("Msd::Store::Lmc.cache") do
   lmc = Msd::Store::Lmc.new("test")
   lmc.cache("example", "value")
-  assert_equal(lmc.fetch("example"), "value")
+  assert_equal("value", lmc.fetch("example"))
 
   lmc.hash_keys = %w(key)
   lmc.cache("hash", { "key" => "value"})
-  assert_equal(lmc.fetch("hash"), { "key" => "value"})
+  assert_equal({ "key" => "value"}, lmc.fetch("hash"))
 end
 
 assert("Msd::Store::Lmc.key_prefix") do
   lmc = Msd::Store::Lmc.new("test")
   lmc.key_prefix = "prefix_"
   lmc.cache("example", "value")
-  assert_equal(lmc.fetch("example"), "value")
+  assert_equal("value", lmc.fetch("example"))
 
   pure_lmc = Msd::Store::Lmc.new("test")
-  assert_equal(pure_lmc.fetch("prefix_example"), "value")
+  assert_equal("value", pure_lmc.fetch("prefix_example"))
 end
 
