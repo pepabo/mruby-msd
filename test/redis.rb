@@ -35,19 +35,19 @@ end
 assert("Msd::Store::Redis.cache") do
   redis = Msd::Store::Redis.new
   redis.cache("example", "value")
-  assert_equal(redis.fetch("example"), "value")
+  assert_equal("value", redis.fetch("example"))
 
   redis.hash_keys = %w(key)
   redis.cache("hash", { "key" => "value"})
-  assert_equal(redis.fetch("hash")["key"], "value")
+  assert_equal("value", redis.fetch("hash")["key"])
 end
 
 assert("Msd::Store::Redis.key_prefix") do
   redis = Msd::Store::Redis.new
   redis.key_prefix = "prefix_"
   redis.cache("example", "value")
-  assert_equal(redis.fetch("example"), "value")
+  assert_equal("value", redis.fetch("example"))
 
   pure_redis = Msd::Store::Redis.new
-  assert_equal(pure_redis.fetch("prefix_example"), "value")
+  assert_equal("value", pure_redis.fetch("prefix_example"))
 end

@@ -32,23 +32,23 @@ end
 assert("Msd::Store::MySQL.fetch") do
   s = subject
   s.set_mysql_class(mock('0'))
-  assert_equal(s.fetch("sample.jp"), "0")
+  assert_equal("0", s.fetch("sample.jp"))
 
   s = subject
   s.set_mysql_class(mock(''))
-  assert_equal(s.fetch("sample.com"), "")
+  assert_equal("", s.fetch("sample.com"))
 end
 
 assert("Msd::Store::MySQL.hash") do
   s = subject('SELECT host, flg FROM test WHERE host = ?')
   s.hash_keys = %w(host flg)
   s.set_mysql_class(mock(['sample.jp', '0']))
-  assert_equal(s.fetch("sample.jp"), {"host"=>"sample.jp", "flg"=>"0"})
+  assert_equal({"host"=>"sample.jp", "flg"=>"0"}, s.fetch("sample.jp"))
 end
 
 assert("Msd::Store::MySQL.key_prefix") do
   s = subject
   s.key_prefix = 'sample.'
   s.set_mysql_class(mock('0'))
-  assert_equal(s.fetch("jp"), "0")
+  assert_equal("0", s.fetch("jp"))
 end
