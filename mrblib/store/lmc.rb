@@ -1,4 +1,6 @@
 module Msd::Store::Prefixer; end
+module Msd::Store::Locker; end
+
 module Msd
   class Store
     class Lmc
@@ -28,17 +30,19 @@ module Msd
       def fetch(key)
         key = set_prefix(key)
         connect unless connect?
+        result = nil
         try_lock_do do
           if has_keys?
             begin
-              JSON.parse(@_c[key])
+              result = JSON.parse(@_c[key])
             rescue
-              @_c[key]
+              result = @_c[key]
             end
           else
-            @_c[key]
+            result = @_c[key]
           end
         end
+        result
       end
 
       def cache(key, val)
