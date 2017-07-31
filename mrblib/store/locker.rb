@@ -1,5 +1,5 @@
 module Msd
-  module Store
+  class Store
     module Locker
       def try_lock_do(&block)
         begin
