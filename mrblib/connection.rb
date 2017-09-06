@@ -43,11 +43,10 @@ module Msd
       stores.each do |s|
         safe_run(
           Proc.new {
-            break if s == klass
             s.cache(key, value)
           },
           Proc.new { s.before_cache_retry }
-        )
+        ) if s == klass
       end
     end
 
