@@ -46,7 +46,7 @@ module Msd
             s.cache(key, value)
           },
           Proc.new { s.before_cache_retry }
-        ) if s == klass
+        ) if s != klass
       end
     end
 

@@ -42,3 +42,17 @@ assert("Msd#fetch") do
 
   assert_equal("value", Msd.fetch("example"))
 end
+
+assert("Msd#fetch_retry") do
+  redis = Msd::Store::Redis.new
+  lmc = Msd::Store::Lmc.new("test")
+
+  Msd.configure do |c|
+    c.stores = [lmc, redis]
+    c.logger = nil
+  end
+  redis.cache("example.com", "1")
+  Msd.fetch("example.com")
+  redis.purge("example.com")
+  assert_equal("1", Msd.fetch("example.com"))
+end
