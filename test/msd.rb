@@ -52,7 +52,7 @@ assert("Msd#fetch_retry") do
     c.logger = nil
   end
   redis.cache("example.com", "1")
-  Msd.fetch("example.com")
+  assert_equal("1", Msd.fetch("example.com"))
   redis.purge("example.com")
   assert_equal("1", Msd.fetch("example.com"))
 end
