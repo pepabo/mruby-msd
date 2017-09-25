@@ -61,7 +61,7 @@ module Msd
 
       def before_fetch_retry
         @_c.close
-        @_c.connect
+        connect
       end
 
       def before_purge_retry;end
