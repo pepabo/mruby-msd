@@ -25,6 +25,7 @@ module Msd
       end
 
       def disconnect
+        @_c.close
         @_c = nil
       end
 
@@ -56,11 +57,11 @@ module Msd
       end
 
       def before_connect_retry
-        @_c.close
+        disconnect
       end
 
       def before_fetch_retry
-        @_c.close
+        disconnect
         connect
       end
 
