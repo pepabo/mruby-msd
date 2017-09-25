@@ -25,8 +25,11 @@ module Msd
       end
 
       def disconnect
-        @_c.close
-        @_c = nil
+        begin
+          @_c.close
+        ensure
+          @_c = nil
+        end
       end
 
       def fetch(key)
