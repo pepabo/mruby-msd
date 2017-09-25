@@ -61,7 +61,7 @@ module Msd
 
       alias_method :before_connect_retry, :close
       alias_method :before_cache_retry, :close
-      alias_method :before_fetche_retry, :close
+      alias_method :before_fetch_retry, :close
       alias_method :before_purge_retry, :close
 
       def set_mock
