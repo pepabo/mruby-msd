@@ -35,7 +35,7 @@ module Msd
       def fetch(key)
         key = set_prefix(key)
         connect unless connect?
-        rows = @_c.execute(@query, key)
+        rows = @_c.execute(@query, *key)
         cols = rows.next
         rows.close
         if cols
