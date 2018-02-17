@@ -5,11 +5,11 @@ MRuby::Gem::Specification.new('mruby-msd') do |spec|
   spec.add_dependency 'mruby-cache',  github:'matsumoto-r/mruby-localmemcache'
   spec.add_dependency 'mruby-env',  github: 'iij/mruby-env'
   spec.add_dependency 'mruby-mysql', github: 'mattn/mruby-mysql'
-  spec.add_dependency 'mruby-mock', github: 'iij/mruby-mock'
   spec.add_dependency 'mruby-redis'
   spec.add_dependency 'mruby-json'
   spec.add_dependency 'mruby-env'
   spec.add_dependency 'mruby-mutex'
   spec.add_test_dependency 'mruby-array-ext'
   spec.add_test_dependency 'mruby-print'
+  spec.add_test_dependency 'mruby-mock', github: 'iij/mruby-mock'
 end
