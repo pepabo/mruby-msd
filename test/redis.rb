@@ -13,21 +13,21 @@ end
 
 assert("Msd::Store::Redis.connect") do
   redis = Msd::Store::Redis.new
-  assert_true redis.connect != nil
+  assert_not_nil redis.connect
 end
 
 assert("Msd::Store::Redis.connect?") do
   redis = Msd::Store::Redis.new
   assert_false redis.connect?
   redis.connect
-  assert_true redis.connect? != nil
+  assert_not_nil redis.connect?
 end
 
 assert("Msd::Store::Redis.close") do
   redis = Msd::Store::Redis.new
   redis.set_mock
   redis.connect
-  assert_true redis.connect?
+  assert_not_nil redis.connect?
   redis.close
   assert_false redis.connect?
 end
