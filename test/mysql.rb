@@ -25,8 +25,8 @@ end
 assert("Msd::Store::MySQL.connect") do
   s = subject
   s.set_mysql_class(mock('1'))
-  assert_true s.connect
-  assert_true s.connect?
+  assert_true s.connect != nil
+  assert_true s.connect? != nil
 end
 
 assert("Msd::Store::MySQL.fetch") do

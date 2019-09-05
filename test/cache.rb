@@ -16,20 +16,20 @@ end
 
 assert("Msd::Store::Lmc.connect") do
   lmc = Msd::Store::Lmc.new("test")
-  assert_true lmc.connect
+  assert_true lmc.connect != nil
 end
 
 assert("Msd::Store::Lmc.connect?") do
   lmc = Msd::Store::Lmc.new("test")
   assert_false lmc.connect?
   lmc.connect
-  assert_true lmc.connect?
+  assert_true lmc.connect? != nil
 end
 
 assert("Msd::Store::Lmc.drop") do
   lmc = Msd::Store::Lmc.new("test")
   lmc.connect
-  assert_true lmc.connect?
+  assert_true lmc.connect? != nil
   lmc.drop
   assert_false lmc.connect?
 end
