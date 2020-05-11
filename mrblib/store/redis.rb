@@ -12,17 +12,17 @@ module Msd
       end
 
       def connect
-        @_c ||= @klass.new(@host, @port, @timeout)
+        @_c = @klass.new(@host, @port, @timeout)
       end
 
       def connect?
-        @_c.ping
+        @_c ? @_c.ping : false
       rescue
         false
       end
 
       def close
-        @_c.close
+        @_c.close if @_c
       rescue
         @c = nil
       end
