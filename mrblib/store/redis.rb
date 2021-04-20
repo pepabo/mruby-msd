@@ -23,8 +23,9 @@ module Msd
 
       def close
         @_c.close
+        @_c = nil
       rescue
-        @c = nil
+        @_c = nil
       end
 
       def fetch(key)
